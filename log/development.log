@@ -1,0 +1,271 @@
+  [1m[36m (61.5ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (30.9ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateBlogs (20180916010619)
+DEPRECATION WARNING: `#timestamps` was called without specifying an option for `null`. In Rails 5, this behavior will change to `null: false`. You should manually specify `null: true` to prevent the behavior of your existing migrations from changing. (called from block in change at /Users/hachiya/projects/blogsite/db/migrate/20180916010619_create_blogs.rb:7)
+  [1m[35m (27.4ms)[0m  CREATE TABLE `blogs` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `text` text, `image` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (24.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20180916010619')
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (1.9ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'blogsite_development'
+  AND fk.table_name = 'blogs'
+[0m
+  [1m[35m (0.3ms)[0m  SHOW CREATE TABLE `blogs`
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to DeviseCreateUsers (20180916011043)
+  [1m[35m (56.0ms)[0m  CREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (19.6ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (17.9ms)[0m  CREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) 
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20180916011043')
+  [1m[36m (12.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+  [1m[36m (0.6ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'blogsite_development'
+  AND fk.table_name = 'blogs'
+[0m
+  [1m[35m (0.4ms)[0m  SHOW CREATE TABLE `blogs`
+  [1m[36m (0.5ms)[0m  [1mSELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'blogsite_development'
+  AND fk.table_name = 'users'
+[0m
+  [1m[35m (0.2ms)[0m  SHOW CREATE TABLE `users`
+
+
+Started GET "/" for ::1 at 2018-09-16 10:22:40 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/hachiya/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (3.0ms)
+Completed 200 OK in 36ms (Views: 20.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 10:23:26 +0900
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /Users/hachiya/.rbenv/versions/2.3.1/lib/ruby/gems/2.3.0/gems/railties-4.2.6/lib/rails/templates/rails/welcome/index.html.erb (0.0ms)
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 10:23:49 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by BlogsController#index as HTML
+  [1m[35mBlog Load (0.3ms)[0m  SELECT `blogs`.* FROM `blogs`  ORDER BY id DESC
+  Rendered blogs/index.html.erb within layouts/application (38.1ms)
+Completed 200 OK in 413ms (Views: 376.0ms | ActiveRecord: 22.3ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2018-09-16 10:23:55 +0900
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (49.6ms)
+Completed 200 OK in 166ms (Views: 133.9ms | ActiveRecord: 19.4ms)
+
+
+Started GET "/users/sign_up" for ::1 at 2018-09-16 10:23:57 +0900
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 110ms (Views: 108.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for ::1 at 2018-09-16 10:24:07 +0900
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ymdukmXm3GNaqO/OVY8hUbam9mbwa36En+hPyrhF9DLOf78mVZNTF+eu/wdVbdQMSnkfctlHDfi4dD1wmj7/vQ==", "user"=>{"email"=>"fef@fef", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Create User"}
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (23.3ms)[0m  SELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'fef@fef' LIMIT 1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `users` (`email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('fef@fef', '$2a$11$FSgs.Mia4fvIhyLtdtGRzur3y7dVAQXOBgqwxwf7iI2rdrueZe4bK', '2018-09-16 01:24:07', '2018-09-16 01:24:07')[0m
+  [1m[35m (1.8ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 311ms (ActiveRecord: 25.7ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 10:24:07 +0900
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.4ms)[0m  [1mSELECT `blogs`.* FROM `blogs`  ORDER BY id DESC[0m
+  [1m[35mUser Load (11.7ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered blogs/index.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 88ms (Views: 74.3ms | ActiveRecord: 12.0ms)
+
+
+Started GET "/blogs/1/edit" for ::1 at 2018-09-16 10:24:10 +0900
+Processing by BlogsController#edit as HTML
+  Parameters: {"authenticity_token"=>"iMt5YY2gGpTYOrVCX29f1sth7/nSqvu7mNWRYdNw3YGM06jVvdWV4GU8pYtfjaqLN74G7fuGiMe/SePb8QvWDg==", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mBlog Load (0.3ms)[0m  SELECT  `blogs`.* FROM `blogs` WHERE `blogs`.`id` = 1 LIMIT 1
+  Rendered blogs/edit.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 65ms (Views: 59.4ms | ActiveRecord: 0.7ms)
+
+
+Started PATCH "/blogs/1" for ::1 at 2018-09-16 10:24:14 +0900
+Processing by BlogsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lMg9yPH4tdfnUaKWKYIlWcC3vEgp5tFQ1yMxn8xJnU6Q0Ox8wY06o1pXsl8pYNAEPGhVXADKoizwv0Ml7jKWwQ==", "blog"=>{"title"=>"ss", "image"=>"", "text"=>"ssssssf"}, "button"=>"", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  `blogs`.* FROM `blogs` WHERE `blogs`.`id` = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE `blogs` SET `image` = '', `text` = 'ssssssf', `updated_at` = '2018-09-16 01:24:14' WHERE `blogs`.`id` = 1
+  [1m[36m (1.6ms)[0m  [1mCOMMIT[0m
+  Rendered blogs/update.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 68ms (Views: 59.5ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 10:24:16 +0900
+Processing by BlogsController#index as HTML
+  [1m[35mBlog Load (0.3ms)[0m  SELECT `blogs`.* FROM `blogs`  ORDER BY id DESC
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered blogs/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 67ms (Views: 65.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/blogs/new" for ::1 at 2018-09-16 10:24:24 +0900
+Processing by BlogsController#new as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered blogs/new.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 61ms (Views: 59.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/blogs" for ::1 at 2018-09-16 10:24:30 +0900
+Processing by BlogsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"BZXWWxG5EGCKkegRCoCrMb61+JkTDdP4gLfwW5RD4fQBjQfvIcyfFDeX+NgKYl5sQmoRjTohoISnK4Lhtjjqew==", "blog"=>{"title"=>"fefefe", "image"=>"", "text"=>"fefefe"}, "button"=>""}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (6.3ms)[0m  [1mINSERT INTO `blogs` (`title`, `image`, `text`, `created_at`, `updated_at`) VALUES ('fefefe', '', 'fefefe', '2018-09-16 01:24:30', '2018-09-16 01:24:30')[0m
+  [1m[35m (6.0ms)[0m  COMMIT
+  Rendered blogs/create.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 73ms (Views: 56.0ms | ActiveRecord: 12.8ms)
+
+
+Started GET "/blogs" for ::1 at 2018-09-16 10:24:32 +0900
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.4ms)[0m  [1mSELECT `blogs`.* FROM `blogs`  ORDER BY id DESC[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered blogs/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 64ms (Views: 63.0ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/blogs/1" for ::1 at 2018-09-16 10:24:35 +0900
+Processing by BlogsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"UvWOQYdZsgoe1iZynpJk6Nvu2l0Uc15fhZ62NVEqA+1W7V/1tyw9fqPQNruecJG1JzEzST1fLSOiAsSPc1EIYg==", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mBlog Load (0.2ms)[0m  SELECT  `blogs`.* FROM `blogs` WHERE `blogs`.`id` = 1 LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (3.6ms)[0m  DELETE FROM `blogs` WHERE `blogs`.`id` = 1
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  Rendered blogs/destroy.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 62ms (Views: 54.0ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 10:24:37 +0900
+Processing by BlogsController#index as HTML
+  [1m[35mBlog Load (0.3ms)[0m  SELECT `blogs`.* FROM `blogs`  ORDER BY id DESC
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered blogs/index.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 66ms (Views: 64.6ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2018-09-16 10:24:39 +0900
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"CaLw6yAKMMwtEP8QODAla9sz3NO4uIdIGXRYGx6gwFMNuiFfEH+/uJAW79k40tA2J+w1x5GU9DQ+6CqhPNvL3A=="}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/
+Completed 302 Found in 8ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 10:24:39 +0900
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.5ms)[0m  [1mSELECT `blogs`.* FROM `blogs`  ORDER BY id DESC[0m
+  Rendered blogs/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 57ms (Views: 55.9ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/blogs" for ::1 at 2018-09-16 10:43:09 +0900
+Processing by BlogsController#index as HTML
+  [1m[35mBlog Load (1.4ms)[0m  SELECT `blogs`.* FROM `blogs`  ORDER BY id DESC
+  Rendered blogs/_blog.html.erb (4.7ms)
+  Rendered blogs/index.html.erb within layouts/application (38.7ms)
+Completed 200 OK in 203ms (Views: 191.5ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/blogs" for ::1 at 2018-09-16 10:43:12 +0900
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.4ms)[0m  [1mSELECT `blogs`.* FROM `blogs`  ORDER BY id DESC[0m
+  Rendered blogs/_blog.html.erb (0.3ms)
+  Rendered blogs/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 72ms (Views: 70.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2018-09-16 10:43:25 +0900
+Processing by Devise::SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 87ms (Views: 83.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2018-09-16 10:43:34 +0900
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"JTrp0Lu/B5AOhArXm2r6e4kSKHXwsMxzHW7v4YMl0LD9GHf1144IespgIshtqoNnbPrKqahJqIRmRiXXphZsIg==", "user"=>{"email"=>"fef@fef", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`email` = 'fef@fef'  ORDER BY `users`.`id` ASC LIMIT 1
+Redirected to http://localhost:3000/
+Completed 302 Found in 230ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 10:43:35 +0900
+Processing by BlogsController#index as HTML
+  [1m[36mBlog Load (0.3ms)[0m  [1mSELECT `blogs`.* FROM `blogs`  ORDER BY id DESC[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered blogs/_blog.html.erb (2.1ms)
+  Rendered blogs/index.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 72ms (Views: 70.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/blogs/new" for ::1 at 2018-09-16 10:43:37 +0900
+Processing by BlogsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered blogs/new.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 63ms (Views: 61.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/blogs" for ::1 at 2018-09-16 10:43:43 +0900
+Processing by BlogsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yW37gy3nBY3eJ9hMCiyD4oFLUYyCIvl+KeDKp600M5w9CmbR/65adohPuPIEu/fcyJKmBzNa/ovY+w/POISIWA==", "blog"=>{"title"=>"fefefefe", "image"=>"", "text"=>"fefefefefe"}, "button"=>""}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (6.5ms)[0m  INSERT INTO `blogs` (`title`, `image`, `text`, `created_at`, `updated_at`) VALUES ('fefefefe', '', 'fefefefefe', '2018-09-16 01:43:43', '2018-09-16 01:43:43')
+  [1m[36m (6.6ms)[0m  [1mCOMMIT[0m
+  Rendered blogs/create.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 78ms (Views: 59.0ms | ActiveRecord: 13.6ms)
+
+
+Started GET "/blogs" for ::1 at 2018-09-16 10:43:44 +0900
+Processing by BlogsController#index as HTML
+  [1m[35mBlog Load (0.3ms)[0m  SELECT `blogs`.* FROM `blogs`  ORDER BY id DESC
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered blogs/_blog.html.erb (1.3ms)
+  Rendered blogs/_blog.html.erb (0.2ms)
+  Rendered blogs/index.html.erb within layouts/application (7.1ms)
+Completed 200 OK in 71ms (Views: 69.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2018-09-16 16:10:39 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (10.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by BlogsController#index as HTML
+  [1m[35mBlog Load (23.0ms)[0m  SELECT `blogs`.* FROM `blogs`  ORDER BY id DESC
+  [1m[36mUser Load (5.1ms)[0m  [1mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered blogs/_blog.html.erb (47.6ms)
+  Rendered blogs/_blog.html.erb (0.2ms)
+  Rendered blogs/index.html.erb within layouts/application (98.5ms)
+Completed 200 OK in 229ms (Views: 149.7ms | ActiveRecord: 60.6ms)

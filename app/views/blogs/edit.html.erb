@@ -1,0 +1,29 @@
+  <div class="row">
+   <%= form_for @blog do |f| %>
+      <h3>
+        編集する
+      </h3>
+      <div class="row">
+        <div class="col s6">
+          <%= f.text_field :title, placeholder: "Title" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <%= f.text_field :image, placeholder: "Image Url" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+      <%= f.text_area :text, placeholder: "text", :size => "30*20" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <%= button_tag type: "submit", class: "btn" do %>
+          投稿する
+          <% end %>
+        </div>
+      </div>
+   <% end %>
+  </div>
