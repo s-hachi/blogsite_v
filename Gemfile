@@ -52,4 +52,4 @@ gem 'kaminari'
 gem "devise"
 
 gem 'sqlite3', group: [:development, :test]
-gem 'pg', group: :production
+gem 'pg', '~> 0.18', group: :production
